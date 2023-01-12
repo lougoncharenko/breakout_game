@@ -6,16 +6,47 @@ let y = canvas.height - 30;
 let dx = 2;
 let dy = -2;
 const ballRadius = 10;
+const paddleHeight = 10;
+const paddleWidth = 75;
+let paddleX = (canvas.width - paddleWidth) / 2;
+let rightPressed = false;
+let leftPressed = false;
 
-// the rectangles on the screen
+//event listeners
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+//functions
+function keyDownHandler(e) {
+    if (e.key === "Right" || e.key === "ArrowRight") {
+      rightPressed = true;
+    } else if (e.key === "Left" || e.key === "ArrowLeft") {
+      leftPressed = true;
+    }
+  }
+  
+  function keyUpHandler(e) {
+    if (e.key === "Right" || e.key === "ArrowRight") {
+      rightPressed = false;
+    } else if (e.key === "Left" || e.key === "ArrowLeft") {
+      leftPressed = false;
+    }
+  }
+
 ctx.beginPath();
 ctx.rect(160, 10, 100, 40);
 ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
 ctx.fill();
 ctx.closePath();
 
+function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+  }
 
-//function that moves the ball
 function drawBall() {
    ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -26,6 +57,7 @@ function drawBall() {
 function moveBall() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall()
+    drawPaddle();
     x += dx;
     y += dy;
     // Bouncing off the left and right
@@ -35,6 +67,12 @@ function moveBall() {
     // Bouncing off the top and bottom
     if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
         dy = -dy;
+      }
+      //moving paddle logic
+      if (rightPressed) {
+        paddleX = Math.min(paddleX + 7, canvas.width - paddleWidth);
+      } else if (leftPressed) {
+        paddleX = Math.max(paddleX - 7, 0);
       }
 }
 setInterval(moveBall,10)
