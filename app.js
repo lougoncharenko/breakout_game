@@ -14,3 +14,9 @@ ctx.rect(160, 10, 100, 40);
 ctx.strokeStyle = "rgba(0, 0, 255, 0.5)";
 ctx.stroke();
 ctx.closePath();
+
+//function that moves the ball
+function moveTheBall() {
+    //code goes here
+}
+setInterval(moveTheBall,10)
