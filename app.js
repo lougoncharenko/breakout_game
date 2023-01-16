@@ -64,17 +64,19 @@ function moveBall() {
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
         dx = -dx;
       }
-    // Bouncing off the top and bottom
+    // Ball bounces off top and game is over when ball hits the bottom
     if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
         dy = -dy;
       }
       //moving paddle logic
-      if (rightPressed) {
+    if (rightPressed) {
         paddleX = Math.min(paddleX + 7, canvas.width - paddleWidth);
       } else if (leftPressed) {
         paddleX = Math.max(paddleX - 7, 0);
       }
 }
-setInterval(moveBall,10)
+
+// ball moves ever ten seconds
+const interval = setInterval(moveBall,10)
 
 
