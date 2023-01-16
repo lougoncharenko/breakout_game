@@ -11,6 +11,7 @@ const paddleWidth = 75;
 let paddleX = (canvas.width - paddleWidth) / 2;
 let rightPressed = false;
 let leftPressed = false;
+let score = 0;
 //brick variables
 const brickRowCount = 3;
 const brickColumnCount = 5;
@@ -79,23 +80,36 @@ function drawBall() {
     ctx.fill();
     ctx.closePath();
 }
+function displayScore() {
+    ctx.font = '16px Arial';
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText(`Score: ${score}`, 8, 20)
+}
 function collisionDetection() {
     for (let c = 0; c < brickColumnCount; c++) {
-        for (let r = 0; r < brickColumnCount; r++) {
-            const b = bricks[c][r];
-            //calculations 
-            if (x > b.x && x < b.x + brickWidth && y > b.y &&
-                y < b.y + brickHeight) {
-                    dy = - dy;
-                }  
+      for (let r = 0; r < brickRowCount; r++) {
+        const b = bricks[c][r];
+        if (b.status === 1) {
+          if (
+            x > b.x &&
+            x < b.x + brickWidth &&
+            y > b.y &&
+            y < b.y + brickHeight
+          ) {
+            dy = -dy;
+            b.status = 0;
+            score++;
+          }
         }
+      }
     }
-}
+  }
 function playGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBricks()
     drawBall()
     drawPaddle();
+    collisionDetection();
     x += dx;
     y += dy;
     // Bouncing off the left and right
