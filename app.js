@@ -11,6 +11,22 @@ const paddleWidth = 75;
 let paddleX = (canvas.width - paddleWidth) / 2;
 let rightPressed = false;
 let leftPressed = false;
+//brick variables
+const brickRowCount = 3;
+const brickColumnCount = 3;
+const brickWidth = 75;
+const brickHeight = 20;
+const brickPadding = 10;
+const brickOffsetTop = 30;
+const brickOffsetLeft = 30;
+//brick field
+const bricks = [];
+for (let i = 0; i < brickColumnCount; i++) {
+    bricks[i] = [];
+    for (let j = 0; j < brickRowCount; j++) {
+        bricks[i][j] = {x: 0, y: 0};
+    }
+}
 
 //event listeners
 document.addEventListener("keydown", keyDownHandler, false);
@@ -25,20 +41,28 @@ function keyDownHandler(e) {
     }
   }
   
-  function keyUpHandler(e) {
+function keyUpHandler(e) {
     if (e.key === "Right" || e.key === "ArrowRight") {
       rightPressed = false;
     } else if (e.key === "Left" || e.key === "ArrowLeft") {
       leftPressed = false;
     }
   }
-
-ctx.beginPath();
-ctx.rect(160, 10, 100, 40);
-ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
-ctx.fill();
-ctx.closePath();
-
+function drawBricks() {
+    for (let i = o; i < brickColumnCount; i++) {
+        for (let j = 0; j < brickRowCount; j++) {
+            const brickX = i * (brickWidth + brickPadding) + brickOffsetLeft;
+            const brickY = j * (brickHeight + brickPadding) + brickOffsetTop;
+            bricks[i][j].x = brickX;
+            bricks[i][j].y = brickY;
+            ctx.beginPath();
+            ctx.rect(160, 10, 100, 40);
+            ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+}
 function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
@@ -54,8 +78,9 @@ function drawBall() {
     ctx.fill();
     ctx.closePath();
 }
-function moveBall() {
+function playGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawBricks()
     drawBall()
     drawPaddle();
     x += dx;
@@ -85,6 +110,6 @@ function moveBall() {
 }
 
 // ball moves ever ten seconds
-const interval = setInterval(moveBall,10)
+const interval = setInterval(playGame,10)
 
 
