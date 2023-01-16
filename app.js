@@ -68,10 +68,14 @@ function moveBall() {
     if (y + dy < ballRadius) {
         dy = -dy;
     } else if (y + dy > canvas.height - ballRadius) {
-        alert('Game Over!')
-        document.location.reload();
-        clearInterval(interval); // this causes chrome tp end the game
-    }
+        if (x > paddleX && x < paddleX + paddleWidth) {
+            dy = -dy;
+        } else {
+            alert('Game Over!')
+            document.location.reload();
+            clearInterval(interval); // this causes chrome tp end the game
+         }
+        }
       //moving paddle logic
     if (rightPressed) {
         paddleX = Math.min(paddleX + 7, canvas.width - paddleWidth);
