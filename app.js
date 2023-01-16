@@ -1,6 +1,7 @@
 // variables
 const canvas = document.getElementById("myCanvas");
-const scoreBoard = document.getElementById("scoreboard")
+const scoreBoard = document.getElementById("scoreboard");
+const startButton = document.getElementById("startbutton");
 let score = 0;
 const ctx = canvas.getContext("2d");
 let x = canvas.width / 2;
@@ -34,8 +35,11 @@ for(let c=0; c<brickColumnCount; c++) {
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
-
+startButton.addEventListener('click', startGame)
 //functions
+function startGame() {
+    const interval = setInterval(playGame,10)
+}
 function keyDownHandler(e) {
     if (e.key === "Right" || e.key === "ArrowRight") {
       rightPressed = true;
@@ -103,7 +107,7 @@ function collisionDetection() {
             b.status = 0;
             score++;
             if (score === brickColumnCount * brickRowCount) {
-                alert("Congratulations! You win!");
+                scoreBoard.innerText = `Congratulations! You win! Score: ${score}`;
                 document.location.reload();
                 clearInterval(interval) // chrome ends the game
             }
@@ -114,10 +118,10 @@ function collisionDetection() {
   }
 function playGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    scoreBoard.innerText = `Score: ${score}`
     drawBricks()
     drawBall()
     drawPaddle();
+    scoreBoard.innerText = `Score: ${score}`
     collisionDetection();
     x += dx;
     y += dy;
@@ -132,7 +136,7 @@ function playGame() {
         if (x > paddleX && x < paddleX + paddleWidth) {
             dy = -dy;
         } else {
-            alert('Game Over!')
+            scoreBoard.innerHTML = `Game Over! Score: ${score}`
             document.location.reload();
             clearInterval(interval); // this causes chrome tp end the game
          }
@@ -146,6 +150,6 @@ function playGame() {
 }
 
 // ball moves ever ten seconds
-const interval = setInterval(playGame,10)
+// const interval = setInterval(playGame,10)
 
 

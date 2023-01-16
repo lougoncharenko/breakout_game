@@ -35,13 +35,13 @@
     align-items: center;
     justify-content: center;
   }
-  #start-button{
+  #startbutton{
     margin: 10px;
     padding: 10px;
     background-color: aqua;
     border-radius: 20px;
   }
-  #reset-button {
+  #resetbutton {
     margin: 10px;
     padding: 10px;
     background-color: aqua;
