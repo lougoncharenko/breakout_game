@@ -12,3 +12,5 @@
 | Author  | [Louisa Goncharenko](https://github.com/lougoncharenko) |
 | Goal  | Learn JavaScript by building the classic arcade Break Out.                                                                                              |
 |       |                                                                                                                                                                                                     |
+
+
