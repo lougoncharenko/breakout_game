@@ -22,6 +22,13 @@
  animation: pulsate 1.5s infinite alternate;  
   }
 
+  #scoreboard {
+    text-align: center;
+    color: white;
+    font-size: 50px;
+    padding-bottom: 40px;
+  }
+
   canvas {
     background: #eee;
     display: block;
