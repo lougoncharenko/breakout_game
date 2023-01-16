@@ -1,5 +1,8 @@
 // variables
 const canvas = document.getElementById("myCanvas");
+const scoreBoard = document.getElementById("scoreboard")
+let score = 0;
+scoreBoard.innerText = `Score: ${score}`
 const ctx = canvas.getContext("2d");
 let x = canvas.width / 2;
 let y = canvas.height - 30;
@@ -11,7 +14,6 @@ const paddleWidth = 75;
 let paddleX = (canvas.width - paddleWidth) / 2;
 let rightPressed = false;
 let leftPressed = false;
-let score = 0;
 //brick variables
 const brickRowCount = 3;
 const brickColumnCount = 5;
