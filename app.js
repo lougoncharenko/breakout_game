@@ -65,9 +65,13 @@ function moveBall() {
         dx = -dx;
       }
     // Ball bounces off top and game is over when ball hits the bottom
-    if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+    if (y + dy < ballRadius) {
         dy = -dy;
-      }
+    } else if (y + dy > canvas.height - ballRadius) {
+        alert('Game Over!')
+        document.location.reload();
+        clearInterval(interval); // this causes chrome tp end the game
+    }
       //moving paddle logic
     if (rightPressed) {
         paddleX = Math.min(paddleX + 7, canvas.width - paddleWidth);
