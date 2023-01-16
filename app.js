@@ -99,6 +99,11 @@ function collisionDetection() {
             dy = -dy;
             b.status = 0;
             score++;
+            if (score === brickColumnCount * brickRowCount) {
+                alert("Congratulations! You win!");
+                document.location.reload();
+                clearInterval(interval) // chrome ends the game
+            }
           }
         }
       }
@@ -109,6 +114,7 @@ function playGame() {
     drawBricks()
     drawBall()
     drawPaddle();
+    displayScore();
     collisionDetection();
     x += dx;
     y += dy;
