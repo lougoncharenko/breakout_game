@@ -76,6 +76,14 @@ function drawBall() {
     ctx.fill();
     ctx.closePath();
 }
+function collisionDetection() {
+    for (let c = 0; c < brickColumnCount; c++) {
+        for (let r = 0; r < brickColumnCount; r++) {
+            const b = bricks[c][r];
+            //calculations
+        }
+    }
+}
 function playGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBricks()
