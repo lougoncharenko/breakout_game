@@ -13,18 +13,18 @@ let rightPressed = false;
 let leftPressed = false;
 //brick variables
 const brickRowCount = 3;
-const brickColumnCount = 3;
+const brickColumnCount = 5;
 const brickWidth = 75;
 const brickHeight = 20;
 const brickPadding = 10;
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
 //brick field
-const bricks = [];
-for (let i = 0; i < brickColumnCount; i++) {
-    bricks[i] = [];
-    for (let j = 0; j < brickRowCount; j++) {
-        bricks[i][j] = {x: 0, y: 0};
+let bricks = [];
+for(let c=0; c<brickColumnCount; c++) {
+    bricks[c] = [];
+    for(let r=0; r<brickRowCount; r++) {
+        bricks[c][r] = { x: 0, y: 0 };
     }
 }
 
@@ -39,8 +39,7 @@ function keyDownHandler(e) {
     } else if (e.key === "Left" || e.key === "ArrowLeft") {
       leftPressed = true;
     }
-  }
-  
+  } 
 function keyUpHandler(e) {
     if (e.key === "Right" || e.key === "ArrowRight") {
       rightPressed = false;
@@ -49,14 +48,14 @@ function keyUpHandler(e) {
     }
   }
 function drawBricks() {
-    for (let i = o; i < brickColumnCount; i++) {
-        for (let j = 0; j < brickRowCount; j++) {
-            const brickX = i * (brickWidth + brickPadding) + brickOffsetLeft;
-            const brickY = j * (brickHeight + brickPadding) + brickOffsetTop;
-            bricks[i][j].x = brickX;
-            bricks[i][j].y = brickY;
+    for(let c=0; c<brickColumnCount; c++) {
+        for(let r=0; r<brickRowCount; r++) {
+            let brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+            let brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
+            bricks[c][r].x = brickX;
+            bricks[c][r].y = brickY;
             ctx.beginPath();
-            ctx.rect(160, 10, 100, 40);
+            ctx.rect(brickX, brickY, brickWidth, brickHeight);
             ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
             ctx.fill();
             ctx.closePath();
@@ -70,7 +69,6 @@ function drawPaddle() {
     ctx.fill();
     ctx.closePath();
   }
-
 function drawBall() {
    ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
