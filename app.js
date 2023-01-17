@@ -31,10 +31,7 @@ for (let c = 0; c < brickColumnCount; c++ ) {
   }
 }
 
-//functions
-function startGame() {
-    const interval = setInterval(playGame,10)
-}
+// functions
 function keyDownHandler(e) {
     if (e.key === 'Right' || e.key === 'ArrowRight') {
       rightPressed = true;
@@ -142,6 +139,9 @@ function playGame() {
       } else if (leftPressed) {
         paddleX = Math.max(paddleX - 7, 0);
       }
+}
+function startGame() {
+  const interval = setInterval(playGame, 10);
 }
 
 // event listeners
