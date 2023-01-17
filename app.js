@@ -31,11 +31,6 @@ for (let c = 0; c < brickColumnCount; c++ ) {
   }
 }
 
-//event listeners
-document.addEventListener('keydown', keyDownHandler, false);
-document.addEventListener('keyup', keyUpHandler, false);
-document.addEventListener('mousemove', mouseMoveHandler, false);
-startButton.addEventListener('click', startGame)
 //functions
 function startGame() {
     const interval = setInterval(playGame,10)
@@ -148,6 +143,12 @@ function playGame() {
         paddleX = Math.max(paddleX - 7, 0);
       }
 }
+
+// event listeners
+document.addEventListener('keydown', keyDownHandler, false);
+document.addEventListener('keyup', keyUpHandler, false);
+document.addEventListener('mousemove', mouseMoveHandler, false);
+startButton.addEventListener('click', startGame);
 
 // ball moves ever ten seconds
 // const interval = setInterval(playGame,10)
