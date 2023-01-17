@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 // variables
 const canvas = document.getElementById('myCanvas');
 const scoreBoard = document.getElementById('scoreboard');
@@ -24,7 +25,7 @@ const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
 // brick field
 const bricks = [];
-for (let c = 0; c < brickColumnCount; c++ ) {
+for (let c = 0; c < brickColumnCount; c++) {
   bricks[c] = [];
   for (let r = 0; r < brickRowCount; r++) {
     bricks[c][r] = { x: 0, y: 0, status: 1 };
@@ -78,13 +79,15 @@ function drawPaddle() {
 }
 function drawBall() {
   ctx.beginPath();
-  ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+  ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
   ctx.fillStyle = 'rgba(194,249,112)';
   ctx.fill();
   ctx.closePath();
 }
 function collisionDetection() {
+  // eslint-disable-next-line no-plusplus
   for (let c = 0; c < brickColumnCount; c++) {
+    // eslint-disable-next-line no-plusplus
     for (let r = 0; r < brickRowCount; r++) {
       const b = bricks[c][r];
       if (b.status === 1) {
@@ -96,6 +99,7 @@ function collisionDetection() {
         ) {
           dy = -dy;
           b.status = 0;
+          // eslint-disable-next-line no-plusplus
           score++;
           if (score === brickColumnCount * brickRowCount) {
             scoreBoard.innerText = `Congratulations! You win! Score: ${score}`;
@@ -108,36 +112,36 @@ function collisionDetection() {
   }
 }
 function playGame() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBricks()
-    drawBall()
-    drawPaddle();
-    scoreBoard.innerText = `Score: ${score}`
-    collisionDetection();
-    x += dx;
-    y += dy;
-    // Bouncing off the left and right
-    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-        dx = -dx;
-      }
-    // Ball bounces off top and game is over when ball hits the bottom
-    if (y + dy < ballRadius) {
-        dy = -dy;
-    } else if (y + dy > canvas.height - ballRadius) {
-        if (x > paddleX && x < paddleX + paddleWidth) {
-            dy = -dy;
-        } else {
-            scoreBoard.innerHTML = `Game Over! Score: ${score}`
-            document.location.reload();
-            clearInterval(interval); // this causes chrome tp end the game
-         }
-        }
-      //moving paddle logic
-    if (rightPressed) {
-        paddleX = Math.min(paddleX + 7, canvas.width - paddleWidth);
-      } else if (leftPressed) {
-        paddleX = Math.max(paddleX - 7, 0);
-      }
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBricks();
+  drawBall();
+  drawPaddle();
+  scoreBoard.innerText = `Score: ${score}`;
+  collisionDetection();
+  x += dx;
+  y += dy;
+  // Bouncing off the left and right
+  if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+    dx = -dx;
+  }
+  // Ball bounces off top and game is over when ball hits the bottom
+  if (y + dy < ballRadius) {
+    dy = -dy;
+  } else if (y + dy > canvas.height - ballRadius) {
+    if (x > paddleX && x < paddleX + paddleWidth) {
+      dy = -dy;
+    } else {
+      scoreBoard.innerHTML = `Game Over! Score: ${score}`;
+      document.location.reload();
+      // clearInterval(interval); // this causes chrome tp end the game
+    }
+  }
+  // moving paddle logic
+  if (rightPressed) {
+    paddleX = Math.min(paddleX + 7, canvas.width - paddleWidth);
+  } else if (leftPressed) {
+    paddleX = Math.max(paddleX - 7, 0);
+  }
 }
 function startGame() {
   setInterval(playGame, 10);
@@ -151,5 +155,3 @@ startButton.addEventListener('click', startGame);
 
 // ball moves ever ten seconds
 // const interval = setInterval(playGame,10)
-
-
