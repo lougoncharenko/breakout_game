@@ -32,6 +32,12 @@ for (let c = 0; c < brickColumnCount; c++) {
     bricks[c][r] = { x: 0, y: 0, status: 1 };
   }
 }
+let isPaused = false;
+const interval = setInterval(() => {
+  if (!isPaused) {
+    playGame();
+  }
+}, 10);
 
 // functions
 function keyDownHandler(e) {
@@ -145,10 +151,13 @@ function playGame() {
   }
 }
 function startGame() {
-  setInterval(playGame, 10);
+  // setInterval(interval);
+  isPaused = false;
 }
+
 function pauseGame() {
-  clearInterval();
+  // clearInterval(interval);
+  isPaused = true;
 }
 
 // event listeners
