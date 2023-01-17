@@ -84,29 +84,29 @@ function drawBall() {
   ctx.closePath();
 }
 function collisionDetection() {
-    for (let c = 0; c < brickColumnCount; c++) {
-      for (let r = 0; r < brickRowCount; r++) {
-        const b = bricks[c][r];
-        if (b.status === 1) {
-          if (
-            x > b.x &&
-            x < b.x + brickWidth &&
-            y > b.y &&
-            y < b.y + brickHeight
-          ) {
-            dy = -dy;
-            b.status = 0;
-            score++;
-            if (score === brickColumnCount * brickRowCount) {
-                scoreBoard.innerText = `Congratulations! You win! Score: ${score}`;
-                document.location.reload();
-                clearInterval(interval) // chrome ends the game
-            }
+  for (let c = 0; c < brickColumnCount; c++) {
+    for (let r = 0; r < brickRowCount; r++) {
+      const b = bricks[c][r];
+      if (b.status === 1) {
+        if (
+          x > b.x
+          && x < b.x + brickWidth
+          && y > b.y
+          && y < b.y + brickHeight
+        ) {
+          dy = -dy;
+          b.status = 0;
+          score++;
+          if (score === brickColumnCount * brickRowCount) {
+            scoreBoard.innerText = `Congratulations! You win! Score: ${score}`;
+            document.location.reload();
+            // clearInterval(interval) // chrome ends the game
           }
         }
       }
     }
   }
+}
 function playGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBricks()
@@ -140,7 +140,7 @@ function playGame() {
       }
 }
 function startGame() {
-  const interval = setInterval(playGame, 10);
+  setInterval(playGame, 10);
 }
 
 // event listeners
