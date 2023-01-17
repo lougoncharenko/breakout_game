@@ -3,6 +3,7 @@
 const canvas = document.getElementById('myCanvas');
 const scoreBoard = document.getElementById('scoreboard');
 const startButton = document.getElementById('startbutton');
+const pauseButton = document.getElementById('pausebutton');
 let score = 0;
 const ctx = canvas.getContext('2d');
 let x = canvas.width / 2;
@@ -146,12 +147,16 @@ function playGame() {
 function startGame() {
   setInterval(playGame, 10);
 }
+function pauseGame() {
+  clearInterval();
+}
 
 // event listeners
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 document.addEventListener('mousemove', mouseMoveHandler, false);
 startButton.addEventListener('click', startGame);
+pauseButton.addEventListener('click', pauseGame);
 
 // ball moves ever ten seconds
 // const interval = setInterval(playGame,10)
