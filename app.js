@@ -33,25 +33,25 @@ for (let c = 0; c < brickColumnCount; c++ ) {
 
 // functions
 function keyDownHandler(e) {
-    if (e.key === 'Right' || e.key === 'ArrowRight') {
-      rightPressed = true;
-    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
-      leftPressed = true;
-    }
-  } 
+  if (e.key === 'Right' || e.key === 'ArrowRight') {
+    rightPressed = true;
+  } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+    leftPressed = true;
+  }
+}
 function keyUpHandler(e) {
-    if (e.key === 'Right' || e.key === 'ArrowRight') {
-      rightPressed = false;
-    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
-      leftPressed = false;
-    }
+  if (e.key === 'Right' || e.key === 'ArrowRight') {
+    rightPressed = false;
+  } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+    leftPressed = false;
   }
-  function mouseMoveHandler(e) {
-    const relativeX = e.clientX - canvas.offsetLeft;
-    if (relativeX > 0 && relativeX < canvas.width) {
-      paddleX = relativeX - paddleWidth / 2;
-    }
+}
+function mouseMoveHandler(e) {
+  const relativeX = e.clientX - canvas.offsetLeft;
+  if (relativeX > 0 && relativeX < canvas.width) {
+    paddleX = relativeX - paddleWidth / 2;
   }
+}
 function drawBricks() {
     for(let c=0; c<brickColumnCount; c++) {
         for(let r=0; r<brickRowCount; r++) {
