@@ -1,4 +1,7 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-plusplus */
+// import Brick from './classes/Brick.js';
+import Brickfield from './classes/Brickfield.js';
 
 // variables
 const canvas = document.getElementById('myCanvas');
@@ -26,13 +29,16 @@ const brickPadding = 10;
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
 // brick field
-const bricks = [];
-for (let c = 0; c < brickColumnCount; c++) {
-  bricks[c] = [];
-  for (let r = 0; r < brickRowCount; r++) {
-    bricks[c][r] = { x: 0, y: 0, status: 1 };
-  }
-}
+// const bricks = [];
+// for (let c = 0; c < brickColumnCount; c++) {
+//   bricks[c] = [];
+//   for (let r = 0; r < brickRowCount; r++) {
+//     bricks[c][r] = { x: 0, y: 0, status: 1 };
+//   }
+// }
+const brickfield = new Brickfield();
+brickfield.drawBrickField();
+
 let isPaused = false;
 const interval = setInterval(() => {
   if (!isPaused) {
@@ -64,7 +70,7 @@ function mouseMoveHandler(e) {
 function drawBricks() {
   for (let c = 0; c < brickColumnCount; c++) {
     for (let r = 0; r < brickRowCount; r++) {
-      if (bricks[c][r].status === 1) {
+     if (bricks[c][r].status === 1) {
         const brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
         const brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
         bricks[c][r].x = brickX;
@@ -72,7 +78,7 @@ function drawBricks() {
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
         ctx.fillStyle = 'rgba(0, 0, 255, 0.5)';
-        ctx.fill();
+        ctx.fill(); 
         ctx.closePath();
       }
     }
