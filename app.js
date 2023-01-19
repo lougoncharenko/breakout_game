@@ -1,4 +1,5 @@
 /* eslint-disable no-plusplus */
+
 // variables
 const canvas = document.getElementById('myCanvas');
 const scoreBoard = document.getElementById('scoreboard');
