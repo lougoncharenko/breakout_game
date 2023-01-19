@@ -2,9 +2,6 @@
 /* eslint-disable no-plusplus */
 import Brick from './Brick.js';
 
-const canvas = document.getElementById('myCanvas');
-const ctx = canvas.getContext('2d');
-
 class Brickfield {
   constructor(
     brickRowCount = 3,
@@ -18,6 +15,8 @@ class Brickfield {
     this.brickPadding = brickPadding;
     this.brickOffsetTop = brickOffsetTop;
     this.brickOffsetLeft = brickOffsetLeft;
+    this.brickWidth = 75;
+    this.brickHeight = 20;
     this.bricks = this.initializeBricks();
   }
 
@@ -38,20 +37,21 @@ class Brickfield {
     return bricks;
   }
 
-  drawBrickField() {
+  drawBrickField(ctx) {
     for (let c = 0; c < this.brickColumnCount; c++) {
       for (let r = 0; r < this.brickRowCount; r++) {
-        if (this.bricks[c][r].status === 1);
-        ctx.beginPath();
-        ctx.rect(
-          this.bricks[c][r].x,
-          this.bricks[c][r].y,
-          this.bricks[c][r].width,
-          this.bricks[c][r].height,
-        );
-        ctx.fillStyle = 'rgba(0, 0, 255, 0.5)';
-        ctx.fill();
-        ctx.closePath();
+        if (this.bricks[c][r].status === 1) {
+          ctx.beginPath();
+          ctx.rect(
+            this.bricks[c][r].x,
+            this.bricks[c][r].y,
+            this.bricks[c][r].width,
+            this.bricks[c][r].height,
+          );
+          ctx.fillStyle = 'rgba(0, 0, 255, 0.5)';
+          ctx.fill();
+          ctx.closePath();
+        }
       }
     }
   }
