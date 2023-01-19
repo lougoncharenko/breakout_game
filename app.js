@@ -36,8 +36,8 @@ const brickOffsetLeft = 30;
 //     bricks[c][r] = { x: 0, y: 0, status: 1 };
 //   }
 // }
+
 const brickfield = new Brickfield();
-brickfield.drawBrickField();
 
 let isPaused = false;
 const interval = setInterval(() => {
@@ -68,21 +68,7 @@ function mouseMoveHandler(e) {
   }
 }
 function drawBricks() {
-  for (let c = 0; c < brickColumnCount; c++) {
-    for (let r = 0; r < brickRowCount; r++) {
-     if (bricks[c][r].status === 1) {
-        const brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
-        const brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
-        bricks[c][r].x = brickX;
-        bricks[c][r].y = brickY;
-        ctx.beginPath();
-        ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        ctx.fillStyle = 'rgba(0, 0, 255, 0.5)';
-        ctx.fill(); 
-        ctx.closePath();
-      }
-    }
-  }
+  brickfield.drawBrickField(ctx);
 }
 function drawPaddle() {
   ctx.beginPath();
@@ -100,22 +86,22 @@ function drawBall() {
 }
 function collisionDetection() {
   // eslint-disable-next-line no-plusplus
-  for (let c = 0; c < brickColumnCount; c++) {
+  for (let c = 0; c < brickfield.brickColumnCount; c++) {
     // eslint-disable-next-line no-plusplus
-    for (let r = 0; r < brickRowCount; r++) {
-      const b = bricks[c][r];
+    for (let r = 0; r < brickfield.brickRowCount; r++) {
+      const b = brickfield.bricks[c][r];
       if (b.status === 1) {
         if (
           x > b.x
-          && x < b.x + brickWidth
+          && x < b.x + b.Width
           && y > b.y
-          && y < b.y + brickHeight
+          && y < b.y + b.Height
         ) {
           dy = -dy;
           b.status = 0;
           // eslint-disable-next-line no-plusplus
           score++;
-          if (score === brickColumnCount * brickRowCount) {
+          if (score === brickfield.brickColumnCount * brickfield.brickRowCount) {
             scoreBoard.innerText = `Congratulations! You win! Score: ${score}`;
             document.location.reload();
             // clearInterval(interval) // chrome ends the game
