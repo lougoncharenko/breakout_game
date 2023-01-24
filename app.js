@@ -2,6 +2,7 @@
 /* eslint-disable no-plusplus */
 import Brickfield from './classes/Brickfield.js';
 import Ball from './classes/Ball.js';
+import Paddle from './classes/Paddle.js';
 
 // variables
 const canvas = document.getElementById('myCanvas');
@@ -23,6 +24,7 @@ let leftPressed = false;
 
 const brickfield = new Brickfield();
 const ball = new Ball();
+const paddle = new Paddle();
 
 let isPaused = false;
 const interval = setInterval(() => {
@@ -56,12 +58,9 @@ function drawBricks() {
   brickfield.drawBrickField(ctx);
 }
 function drawPaddle() {
-  ctx.beginPath();
-  ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = '#0095DD';
-  ctx.fill();
-  ctx.closePath();
+  paddle.draw(ctx, canvas.Width, canvas.height, paddleX);
 }
+
 function drawBall() {
   ball.draw(ctx, x, y);
 }
