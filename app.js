@@ -63,12 +63,9 @@ function drawPaddle() {
   ctx.closePath();
 }
 function drawBall() {
-  ctx.beginPath();
-  ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-  ctx.fillStyle = 'rgba(194,249,112)';
-  ctx.fill();
-  ctx.closePath();
+  ball.draw(ctx, x, y);
 }
+
 function collisionDetection() {
   for (let c = 0; c < brickfield.brickColumnCount; c++) {
     for (let r = 0; r < brickfield.brickRowCount; r++) {
