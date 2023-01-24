@@ -70,9 +70,7 @@ function drawBall() {
   ctx.closePath();
 }
 function collisionDetection() {
-  // eslint-disable-next-line no-plusplus
   for (let c = 0; c < brickfield.brickColumnCount; c++) {
-    // eslint-disable-next-line no-plusplus
     for (let r = 0; r < brickfield.brickRowCount; r++) {
       const b = brickfield.bricks[c][r];
       if (b.status === 1) {
@@ -84,12 +82,10 @@ function collisionDetection() {
         ) {
           dy = -dy;
           b.status = 0;
-          // eslint-disable-next-line no-plusplus
           score++;
           if (score === brickfield.brickColumnCount * brickfield.brickRowCount) {
             scoreBoard.innerText = `Congratulations! You win! Score: ${score}`;
             document.location.reload();
-            // clearInterval(interval) // chrome ends the game
           }
         }
       }
@@ -118,7 +114,6 @@ function playGame() {
     } else {
       scoreBoard.innerHTML = `Game Over! Score: ${score}`;
       document.location.reload();
-      // clearInterval(interval); // this causes chrome tp end the game
     }
   }
   // moving paddle logic
@@ -129,12 +124,10 @@ function playGame() {
   }
 }
 function startGame() {
-  // setInterval(interval);
   isPaused = false;
 }
 
 function pauseGame() {
-  // clearInterval(interval);
   isPaused = true;
 }
 
@@ -144,6 +137,3 @@ document.addEventListener('keyup', keyUpHandler, false);
 document.addEventListener('mousemove', mouseMoveHandler, false);
 startButton.addEventListener('click', startGame);
 pauseButton.addEventListener('click', pauseGame);
-
-// ball moves ever ten seconds
-// const interval = setInterval(playGame,10)
