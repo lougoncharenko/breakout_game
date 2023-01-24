@@ -16,23 +16,15 @@ let x = canvas.width / 2;
 let y = canvas.height - 30;
 const ballRadius = 10;
 let paddleX = (canvas.width - 75) / 2;
-
+// Instantiations
 const brickfield = new Brickfield();
 const ball = new Ball();
 const paddle = new Paddle(paddleX);
-
-let isPaused = false;
-const interval = setInterval(() => {
-  if (!isPaused) {
-    playGame();
-  }
-}, 10);
 
 // functions
 function keyDownHandler(e) {
   paddle.keyDownHandler(e);
 }
-
 function keyUpHandler(e) {
   paddle.keyUpHandler(e);
 }
@@ -97,6 +89,12 @@ function playGame() {
   paddleX = paddle.move(canvas.width);
   return paddleX;
 }
+let isPaused = false;
+const interval = setInterval(() => {
+  if (!isPaused) {
+    playGame();
+  }
+}, 10);
 function startGame() {
   isPaused = false;
 }
@@ -104,7 +102,6 @@ function startGame() {
 function pauseGame() {
   isPaused = true;
 }
-
 // event listeners
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
