@@ -14,9 +14,9 @@ class Ball extends Sprite {
     this.y += this.dy;
   }
 
-  draw(ctx) { // Overrides the existing render method!
+  draw(ctx, x, y) { // Overrides the existing render method!
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.arc(x, y, this.radius, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.closePath();
