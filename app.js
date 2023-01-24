@@ -40,6 +40,28 @@ function drawPaddle() {
 function drawBall() {
   ball.draw(ctx, x, y);
 }
+function moveBall() {
+  const cordinates = ball.move(x, y);
+  x = cordinates[0];
+  y = cordinates[1];
+  if (x + ball.dx > canvas.width - ballRadius || x + ball.dx < ballRadius) {
+    ball.dx = -ball.dx;
+  }
+  if (y + ball.dy < ballRadius) {
+    ball.dy = -ball.dy;
+  } else if (y + ball.dy > canvas.height - ballRadius) {
+    if (x > paddleX && x < paddleX + 75) {
+      ball.dy = -ball.dy;
+    } else {
+      scoreBoard.innerHTML = `Game Over! Score: ${score}`;
+      document.location.reload();
+    }
+  }
+}
+function movePaddle() {
+  paddleX = paddle.move(canvas.width);
+  return paddleX;
+}
 function collisionDetection() {
   for (let c = 0; c < brickfield.brickColumnCount; c += 1) {
     for (let r = 0; r < brickfield.brickRowCount; r += 1) {
@@ -63,31 +85,18 @@ function collisionDetection() {
     }
   }
 }
+function calculateScore() {
+  scoreBoard.innerText = `Score: ${score}`;
+}
 function playGame() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBricks();
   drawBall();
   drawPaddle();
-  scoreBoard.innerText = `Score: ${score}`;
+  calculateScore();
   collisionDetection();
-  const cordinates = ball.move(x, y);
-  x = cordinates[0];
-  y = cordinates[1];
-  if (x + ball.dx > canvas.width - ballRadius || x + ball.dx < ballRadius) {
-    ball.dx = -ball.dx;
-  }
-  if (y + ball.dy < ballRadius) {
-    ball.dy = -ball.dy;
-  } else if (y + ball.dy > canvas.height - ballRadius) {
-    if (x > paddleX && x < paddleX + 75) {
-      ball.dy = -ball.dy;
-    } else {
-      scoreBoard.innerHTML = `Game Over! Score: ${score}`;
-      document.location.reload();
-    }
-  }
-  paddleX = paddle.move(canvas.width);
-  return paddleX;
+  moveBall();
+  movePaddle();
 }
 let isPaused = false;
 const interval = setInterval(() => {
