@@ -28,6 +28,13 @@ class Paddle extends Sprite {
     }
   }
 
+  mouseMoveHandler(e, CanvasOffSetLeft, CanvasWidth) {
+    const relativeX = e.clientX - CanvasOffSetLeft;
+    if (relativeX > 0 && relativeX < CanvasWidth) {
+      this.paddleX = relativeX - this.paddleWidth / 2;
+    }
+  }
+
   move(canvasWidth) {
     if (this.rightPressed) {
       this.paddleX = Math.min(this.paddleX + 7, canvasWidth - this.paddleWidth);
