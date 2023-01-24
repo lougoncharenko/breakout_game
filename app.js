@@ -4,19 +4,17 @@ import Brickfield from './classes/Brickfield.js';
 import Ball from './classes/Ball.js';
 import Paddle from './classes/Paddle.js';
 
-// variables
+// DOM variables
 const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
 const scoreBoard = document.getElementById('scoreboard');
 const startButton = document.getElementById('startbutton');
 const pauseButton = document.getElementById('pausebutton');
+// Variables
 let score = 0;
-const ctx = canvas.getContext('2d');
 let x = canvas.width / 2;
 let y = canvas.height - 30;
-let dx = 2;
-let dy = -2;
 const ballRadius = 10;
-const paddleWidth = 75;
 let paddleX = (canvas.width - 75) / 2;
 
 const brickfield = new Brickfield();
@@ -50,21 +48,20 @@ function drawPaddle() {
 function drawBall() {
   ball.draw(ctx, x, y);
 }
-// TO DO FIx this
 function collisionDetection() {
-  for (let c = 0; c < brickfield.brickColumnCount; c++) {
-    for (let r = 0; r < brickfield.brickRowCount; r++) {
-      const b = brickfield.bricks[c][r];
-      if (b.status === 1) {
+  for (let c = 0; c < brickfield.brickColumnCount; c += 1) {
+    for (let r = 0; r < brickfield.brickRowCount; r += 1) {
+      const brick = brickfield.bricks[c][r];
+      if (brick.status === 1) {
         if (
-          x > b.x
-          && x < b.x + b.Width
-          && y > b.y
-          && y < b.y + b.Height
+          ball.x > brick.x
+          && ball.x < brick.x + brick.width
+          && ball.y > brick.y
+          && ball.y < brick.y + brick.height
         ) {
-          dy = -dy;
-          b.status = 0;
-          score++;
+          ball.dy = -ball.dy;
+          brick.status = 0;
+          score += 1;
           if (score === brickfield.brickColumnCount * brickfield.brickRowCount) {
             scoreBoard.innerText = `Congratulations! You win! Score: ${score}`;
             document.location.reload();
@@ -81,18 +78,17 @@ function playGame() {
   drawPaddle();
   scoreBoard.innerText = `Score: ${score}`;
   collisionDetection();
-  x += dx;
-  y += dy;
-  // Bouncing off the left and right
-  if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-    dx = -dx;
+  const cordinates = ball.move(x, y);
+  x = cordinates[0];
+  y = cordinates[1];
+  if (x + ball.dx > canvas.width - ballRadius || x + ball.dx < ballRadius) {
+    ball.dx = -ball.dx;
   }
-  // Ball bounces off top and game is over when ball hits the bottom
-  if (y + dy < ballRadius) {
-    dy = -dy;
-  } else if (y + dy > canvas.height - ballRadius) {
-    if (x > paddleX && x < paddleX + paddleWidth) {
-      dy = -dy;
+  if (y + ball.dy < ballRadius) {
+    ball.dy = -ball.dy;
+  } else if (y + ball.dy > canvas.height - ballRadius) {
+    if (x > paddleX && x < paddleX + 75) {
+      ball.dy = -ball.dy;
     } else {
       scoreBoard.innerHTML = `Game Over! Score: ${score}`;
       document.location.reload();
