@@ -25,7 +25,6 @@ class Brickfield {
     for (let c = 0; c < this.brickColumnCount; c++) {
       bricks[c] = [];
       for (let r = 0; r < this.brickRowCount; r++) {
-        // bricks[c][r] = { x: 0, y: 0, status: 1 };
         bricks[c][r] = new Brick();
         if (bricks[c][r].status === 1) {
           const brickX = (c * (this.brickWidth + this.brickPadding)) + this.brickOffsetLeft;
