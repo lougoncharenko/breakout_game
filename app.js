@@ -18,13 +18,13 @@ let dy = -2;
 const ballRadius = 10;
 const paddleHeight = 10;
 const paddleWidth = 75;
-let paddleX = (canvas.width - paddleWidth) / 2;
+let paddleX = (canvas.width - 75) / 2;
 let rightPressed = false;
 let leftPressed = false;
 
 const brickfield = new Brickfield();
 const ball = new Ball();
-const paddle = new Paddle();
+const paddle = new Paddle(paddleX);
 
 let isPaused = false;
 const interval = setInterval(() => {
@@ -35,19 +35,27 @@ const interval = setInterval(() => {
 
 // functions
 function keyDownHandler(e) {
-  if (e.key === 'Right' || e.key === 'ArrowRight') {
-    rightPressed = true;
-  } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
-    leftPressed = true;
-  }
+  paddle.keyDownHandler(e);
 }
+
 function keyUpHandler(e) {
-  if (e.key === 'Right' || e.key === 'ArrowRight') {
-    rightPressed = false;
-  } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
-    leftPressed = false;
-  }
+  paddle.keyUpHandler(e);
 }
+
+// function keyDownHandler(e) {
+//   if (e.key === 'Right' || e.key === 'ArrowRight') {
+//     rightPressed = true;
+//   } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+//     leftPressed = true;
+//   }
+// }
+// function keyUpHandler(e) {
+//   if (e.key === 'Right' || e.key === 'ArrowRight') {
+//     rightPressed = false;
+//   } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+//     leftPressed = false;
+//   }
+// }
 function mouseMoveHandler(e) {
   const relativeX = e.clientX - canvas.offsetLeft;
   if (relativeX > 0 && relativeX < canvas.width) {
@@ -58,13 +66,12 @@ function drawBricks() {
   brickfield.drawBrickField(ctx);
 }
 function drawPaddle() {
-  paddle.draw(ctx, canvas.Width, canvas.height, paddleX);
+  paddle.draw(ctx, canvas.height, paddleX);
 }
-
 function drawBall() {
   ball.draw(ctx, x, y);
 }
-
+// TO DO FIx this
 function collisionDetection() {
   for (let c = 0; c < brickfield.brickColumnCount; c++) {
     for (let r = 0; r < brickfield.brickRowCount; r++) {
@@ -113,11 +120,13 @@ function playGame() {
     }
   }
   // moving paddle logic
-  if (rightPressed) {
-    paddleX = Math.min(paddleX + 7, canvas.width - paddleWidth);
-  } else if (leftPressed) {
-    paddleX = Math.max(paddleX - 7, 0);
-  }
+  // if (rightPressed) {
+  //   paddleX = Math.min(paddleX + 7, canvas.width - paddleWidth);
+  // } else if (leftPressed) {
+  //   paddleX = Math.max(paddleX - 7, 0);
+  // }
+  paddleX = paddle.move(canvas.width);
+  return paddleX;
 }
 function startGame() {
   isPaused = false;
