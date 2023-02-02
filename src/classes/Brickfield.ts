@@ -3,6 +3,14 @@
 import Brick from './Brick.js';
 
 class Brickfield {
+  brickRowCount: number;
+  brickColumnCount: number;
+  brickPadding: number;
+  brickOffsetTop: number;
+  brickOffsetLeft: number;
+  brickWidth: number;
+  brickHeight:number
+  bricks: any;
   constructor(
     brickRowCount = 3,
     brickColumnCount = 5,
@@ -20,7 +28,7 @@ class Brickfield {
     this.bricks = this.initializeBricks();
   }
 
-  initializeBricks() {
+  initializeBricks():() => any {
     const bricks = [];
     for (let c = 0; c < this.brickColumnCount; c++) {
       bricks[c] = [];
@@ -36,7 +44,7 @@ class Brickfield {
     return bricks;
   }
 
-  drawBrickField(ctx) {
+  drawBrickField(ctx: CanvasRenderingContext2D) {
     for (let c = 0; c < this.brickColumnCount; c++) {
       for (let r = 0; r < this.brickRowCount; r++) {
         if (this.bricks[c][r].status === 1) {

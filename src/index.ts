@@ -12,8 +12,8 @@ const startButton = document.getElementById('startbutton') as HTMLButtonElement;
 const pauseButton = document.getElementById('pausebutton') as HTMLButtonElement;
 // Variables
 let score:number = 0;
-const x:number = canvas.width / 2;
-const y: number = canvas.height - 30;
+let x:number = canvas.width / 2;
+let y: number = canvas.height - 30;
 const ballRadius:number = 10;
 let paddleX:number = (canvas.width - 75) / 2;
 // Instantiations
