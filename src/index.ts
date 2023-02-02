@@ -22,13 +22,13 @@ const ball = new Ball();
 const paddle = new Paddle(paddleX);
 
 // functions
-function keyDownHandler(e: Event) {
+function keyDownHandler(e: KeyboardEvent) {
   paddle.keyDownHandler(e);
 }
-function keyUpHandler(e: Event) {
+function keyUpHandler(e: KeyboardEvent) {
   paddle.keyUpHandler(e);
 }
-function mouseMoveHandler(e: Event) {
+function mouseMoveHandler(e: MouseEvent) {
   paddle.mouseMoveHandler(e, canvas.offsetLeft, canvas.width);
 }
 function drawBricks() {
@@ -38,7 +38,7 @@ function drawPaddle() {
   paddle.draw(ctx, canvas.height, paddleX);
 }
 function drawBall() {
-  ball.draw(ctx, x, y);
+  ball.draw(ctx);
 }
 function moveBall() {
   const cordinates = ball.move(x, y);
