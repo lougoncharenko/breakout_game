@@ -10,7 +10,7 @@ class Brickfield {
   brickOffsetLeft: number;
   brickWidth: number;
   brickHeight:number
-  bricks: any;
+  bricks: any[][];
   constructor(
     brickRowCount = 3,
     brickColumnCount = 5,
@@ -28,7 +28,7 @@ class Brickfield {
     this.bricks = this.initializeBricks();
   }
 
-  initializeBricks():() => any {
+  initializeBricks(): any {
     const bricks = [];
     for (let c = 0; c < this.brickColumnCount; c++) {
       bricks[c] = [];
