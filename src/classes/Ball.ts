@@ -2,6 +2,9 @@
 import Sprite from './Sprite.js';
 
 class Ball extends Sprite {
+  radius: number;
+  dx: number;
+  dy: number;
   constructor(x = 0, y = 0, radius = 10, color = '#0095DD') {
     super(x, y, 0, 0, color);
     this.radius = radius;
@@ -9,7 +12,7 @@ class Ball extends Sprite {
     this.dy = -2;
   }
 
-  move(x, y) {
+  move(x:number, y:number) {
     this.x = x;
     this.y = y;
     this.x += this.dx;
@@ -17,7 +20,7 @@ class Ball extends Sprite {
     return [this.x, this.y];
   }
 
-  draw(ctx) { // Overrides the existing render method!
+  draw(ctx: CanvasRenderingContext2D) { // Overrides the existing render method!
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
