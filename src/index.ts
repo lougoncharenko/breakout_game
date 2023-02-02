@@ -5,30 +5,30 @@ import Ball from './classes/Ball.js';
 import Paddle from './classes/Paddle.js';
 
 // DOM variables
-const canvas = document.getElementById('myCanvas');
+const canvas = document.getElementById('myCanvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
-const scoreBoard = document.getElementById('scoreboard');
-const startButton = document.getElementById('startbutton');
-const pauseButton = document.getElementById('pausebutton');
+const scoreBoard = document.getElementById('scoreboard') as HTMLElement    ;
+const startButton = document.getElementById('startbutton') as HTMLButtonElement;
+const pauseButton = document.getElementById('pausebutton') as HTMLButtonElement;
 // Variables
-let score = 0;
-let x = canvas.width / 2;
-let y = canvas.height - 30;
-const ballRadius = 10;
-let paddleX = (canvas.width - 75) / 2;
+let score:number = 0;
+const x:number = canvas.width / 2;
+const y: number = canvas.height - 30;
+const ballRadius:number = 10;
+let paddleX:number = (canvas.width - 75) / 2;
 // Instantiations
 const brickfield = new Brickfield();
 const ball = new Ball();
 const paddle = new Paddle(paddleX);
 
 // functions
-function keyDownHandler(e) {
+function keyDownHandler(e: Event) {
   paddle.keyDownHandler(e);
 }
-function keyUpHandler(e) {
+function keyUpHandler(e: Event) {
   paddle.keyUpHandler(e);
 }
-function mouseMoveHandler(e) {
+function mouseMoveHandler(e: Event) {
   paddle.mouseMoveHandler(e, canvas.offsetLeft, canvas.width);
 }
 function drawBricks() {
